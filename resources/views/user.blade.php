@@ -6,8 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>This is a test_page</h1>
-    <div>This is a test text-1</div>
-    <div>This is a test text-2</div>
+    <h1>This is a user_page</h1>
+    <div>This is a user text-1</div>
+    <div>This is a user text-2</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController; // INFO: we must import the controller here!!!
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +18,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function() {
-    return view('test_page');
-});
+// INFO: This is the new way to route page with func. -->> [UserController::class, 'index']
+Route::get('/user', [UserController::class, 'index']);
+
+Route::get('/choose', [UserController::class, 'chooseMovie']);
