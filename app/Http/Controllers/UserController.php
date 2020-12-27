@@ -56,6 +56,7 @@ class UserController extends Controller
           border: 4px solid #000000;
           text-align: center;
           padding: 8px;
+          font-size: 150%;
         }
         
         tr {
@@ -88,10 +89,11 @@ class UserController extends Controller
         
         echo "<style>
         img {
-            width: 25%;
+            width: 65%;
             display: block;
             margin-left: auto;
             margin-right: auto;
+            padding-top: 20px;
             padding-bottom: 20px;
         }
         h1 {
@@ -101,24 +103,27 @@ class UserController extends Controller
         table {
           font-family: arial, sans-serif;
           border-collapse: collapse;
-          width: 100%;
+          width: 90%;
           margin-left: auto;
           margin-right: auto;
+          padding-left: 50px;
+          padding-right: 50px;
         }
         
         td, th {
-          border: 4px solid #000000;
+          border: 2px solid #000000;
           text-align: center;
           padding: 8px;
         }
         
         tr {
-          background-color: #f3cd98;
+          background-color: #7FFFD4
+          ;
         }
         </style>";
 
         echo '<img src="' . url($imagePath) . '"/>';
-        echo "<table style=" . "width:50%" . ">";
+        echo "<table>";
             echo "<tr>";
                 echo "<th>" . "Title" . "</th>";
                 echo "<th>" . $users[$selectedMovieIndex]->primaryTitle . "</th>";
