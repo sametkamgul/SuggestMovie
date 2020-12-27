@@ -73,7 +73,7 @@ class UserController extends Controller
     // creates random integer for movie index.
     public function createRandomMovieIndex($maxMovieIndex)
     {
-        return rand(0, $maxMovieIndex);
+        return rand(0, $maxMovieIndex-1);
     }
 
     // Selects randomly a movie from the db
@@ -81,11 +81,19 @@ class UserController extends Controller
     {
         $users = DB::select('select * from movies');
         $arrayLength = count($users);
-        $selectedMovieIndex = self::createRandomMovieIndex($arrayLength);
+        $selectedMovieIndex = self::createRandomMovieIndex($arrayLength);        
         
-        //echo $users[$selectedMovieIndex]->primaryTitle;
-        echo "<h1>Suggested Movie</h1>";
+        $selectedMovieIndex_ = $selectedMovieIndex + 1;
+        $imagePath = "moviesThumbs/" . $selectedMovieIndex_ . ".jpg";
+        
         echo "<style>
+        img {
+            width: 25%;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 20px;
+        }
         h1 {
             text-align: center;
             font-size: 200%;
@@ -94,6 +102,8 @@ class UserController extends Controller
           font-family: arial, sans-serif;
           border-collapse: collapse;
           width: 100%;
+          margin-left: auto;
+          margin-right: auto;
         }
         
         td, th {
@@ -106,34 +116,37 @@ class UserController extends Controller
           background-color: #f3cd98;
         }
         </style>";
-        echo "<table style=" . "width:100%" . ">";
-        echo 
-        "<tr>
-            <th>Title</th>
-            <th>Original Title</th>
-            <th>Release Year</th>
-            </tr>
-            ";
-        echo "<tr>";
-            //echo "<td>" . $user->titleType . "</td>";
-            echo "<td>" . $users[$selectedMovieIndex]->primaryTitle . "</td>";
-            echo "<td>" . $users[$selectedMovieIndex]->originalTitle . "</td>";
-            //echo "<td>" . $user->isAdult . "</td>";
-            echo "<td>" . $users[$selectedMovieIndex]->startYear . "</td>";
-            //echo "<td>" . $user->endYear . "</td>";
-            echo "</tr>";
-            echo "<tr>
-                <th>Duration</th>
-                <th>Genre</th>
-                <th>Imdb Rating</th>
-                <th>Votes</th>
-            </tr>";
+
+        echo '<img src="' . url($imagePath) . '"/>';
+        echo "<table style=" . "width:50%" . ">";
             echo "<tr>";
-            echo "<td>" . $users[$selectedMovieIndex]->runtimeMinutes . " min" . "</td>";
-            echo "<td>" . $users[$selectedMovieIndex]->genres . "</td>";
-            echo "<td>" . self::getRatingsInfo($selectedMovieIndex)->avarageRating . "</td>";
-            echo "<td>" . self::getRatingsInfo($selectedMovieIndex)->numVotes . "</td>";
-        echo "</tr>";
+                echo "<th>" . "Title" . "</th>";
+                echo "<th>" . $users[$selectedMovieIndex]->primaryTitle . "</th>";
+            echo "</tr>";
+            echo "<tr>";
+                echo "<th>" . "Director" . "</th>";
+                echo "<th>" . $users[$selectedMovieIndex]->director . "</th";
+            echo "<tr>";
+            echo "</tr>";
+                echo "<th>" . "Release Year" . "</th>";
+                echo "<th>" . $users[$selectedMovieIndex]->startYear . "</th>";
+            echo "</tr>";
+            echo "</tr>";
+                echo "<th>" . "Duration" . "</th>";
+                echo "<th>" . $users[$selectedMovieIndex]->runtimeMinutes . "</th>";
+            echo "<tr>";
+            echo "</tr>";
+                echo "<th>" . "Genre" . "</th>";
+                echo "<th>" . $users[$selectedMovieIndex]->genres . "</th>";
+            echo "</tr>";
+            echo "<tr>";
+                echo "<th>" . "Rating" . "</th>";
+                echo "<th>" . $users[$selectedMovieIndex]->avarageRating . "</th>";
+            echo "</tr>";
+            echo "<tr>";
+                echo "<th>" . "Cast" . "</th>";
+                echo "<th>" . $users[$selectedMovieIndex]->crew . "</th>";
+            echo "</tr>";
         echo "</table>";
         
     }
